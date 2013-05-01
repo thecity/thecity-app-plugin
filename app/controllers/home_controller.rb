@@ -31,8 +31,7 @@ class HomeController < ApplicationController
   end
 
   def authentication_data(auth_token)
-    full_url = "http://authentication.devthecity.org:3002/authorization"
-    response = Typhoeus::Request.send(:get, full_url, :params => {:access_token => auth_token})
+    response = Typhoeus::Request.send(:get, THE_CITY_AUTH_URL, :params => {:access_token => auth_token})
     response_body = {}
     if response.success?
       response_body = (JSON.parse(response.body) rescue {})
