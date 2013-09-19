@@ -3,7 +3,9 @@ require 'openssl'
 class HomeController < ApplicationController
 
   def index
-    @city_data = decrypt_city_data(params[:city_data], params[:city_data_iv])
+    @raw_city_data = params[:city_data]
+    @raw_city_date_iv = params[:city_data_iv]
+    @city_data = decrypt_city_data(@raw_city_data, @raw_city_date_iv)
     if @city_data.present?
       @city_auth_data = authentication_data(@city_data["oauth_token"])
     end
