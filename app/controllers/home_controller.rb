@@ -19,8 +19,7 @@ class HomeController < ApplicationController
     if city_data.present?
       string_to_decrypt = Base64.urlsafe_decode64(city_data)
       iv = Base64.urlsafe_decode64(city_data_iv)
-      json_data = city_decrypt(string_to_decrypt, THE_CITY_APP_SECRET.first(32), iv)
-      return ActiveSupport::JSON.decode(json_data)
+      return city_decrypt(string_to_decrypt, THE_CITY_APP_SECRET.first(32), iv)
     else
       return {}
     end
