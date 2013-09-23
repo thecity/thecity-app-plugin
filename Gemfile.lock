@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/thecity/cityplugin.git
+  revision: 482454eb7b658f1928a024743bdce1a4b1647433
+  specs:
+    cityplugin (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -122,6 +128,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  cityplugin!
   coffee-rails (~> 3.2.1)
   debugger
   jquery-rails

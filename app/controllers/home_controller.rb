@@ -1,11 +1,9 @@
-require 'openssl'
-
 class HomeController < ApplicationController
 
   def index
     @raw_city_data = params[:city_data]
     @raw_city_data_iv = params[:city_data_iv]
-    @decrypted_city_data = decrypt_city_data(@raw_city_data, @raw_city_data_iv)
+    @decrypted_city_data = Cityplugin::decrypt_city_data(@raw_city_data, @raw_city_data_iv, THE_CITY_APP_SECRET.first(32))
 
     @city_data = ActiveSupport::JSON.decode(@decrypted_city_data)
     if @city_data.present?
@@ -14,24 +12,6 @@ class HomeController < ApplicationController
   end
 
   private
-
-  def decrypt_city_data(city_data, city_data_iv)
-    if city_data.present?
-      string_to_decrypt = Base64.urlsafe_decode64(city_data)
-      iv = Base64.urlsafe_decode64(city_data_iv)
-      return city_decrypt(string_to_decrypt, THE_CITY_APP_SECRET.first(32), iv)
-    else
-      return {}
-    end
-  end
-
-  def city_decrypt(encrypted_data, key, iv, cipher_type = "AES-256-CBC")
-    aes = OpenSSL::Cipher::Cipher.new(cipher_type)
-    aes.decrypt
-    aes.key = key
-    aes.iv = iv if iv != nil
-    aes.update(encrypted_data) + aes.final
-  end
 
   def authentication_data(auth_token)
     response = Typhoeus::Request.send(:get, THE_CITY_AUTH_URL, :params => {:access_token => auth_token})
@@ -47,6 +27,5 @@ class HomeController < ApplicationController
     end
     return response_body
   end
-
 
 end

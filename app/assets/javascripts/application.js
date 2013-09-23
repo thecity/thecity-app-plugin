@@ -15,5 +15,5 @@
 //= require_tree .
 
 $(document).ready(function() {
-    XD.postMessage(600, '*');
+    XD.postMessage(1000, '*');
 });
