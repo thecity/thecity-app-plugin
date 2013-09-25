@@ -1,8 +1,8 @@
 GIT
-  remote: https://github.com/thecity/cityplugin.git
-  revision: 482454eb7b658f1928a024743bdce1a4b1647433
+  remote: https://github.com/thecity/thecity-plugin.git
+  revision: 995ff9475f196f6974eb45f47dbc4d7e77804ca9
   specs:
-    cityplugin (0.0.1)
+    thecity-plugin (0.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -128,12 +128,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cityplugin!
   coffee-rails (~> 3.2.1)
   debugger
   jquery-rails
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
+  thecity-plugin!
   thin
   typhoeus
   uglifier (>= 1.0.3)

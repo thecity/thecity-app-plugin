@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   def index
     @raw_city_data = params[:city_data]
     @raw_city_data_iv = params[:city_data_iv]
-    @decrypted_city_data = Cityplugin::decrypt_city_data(@raw_city_data, @raw_city_data_iv, THE_CITY_APP_SECRET.first(32))
+    @decrypted_city_data = Thecity::Plugin::decrypt_city_data(@raw_city_data, @raw_city_data_iv, THE_CITY_APP_SECRET.first(32))
 
     @city_data = ActiveSupport::JSON.decode(@decrypted_city_data)
     if @city_data.present?
