@@ -15,5 +15,4 @@ In order to get this sample to run, you will need to configure a couple of envir
     $ production:
     $   THE_CITY_APP_SECRET: XXXXXXXXXXXXXXXXXXXX
     $   THE_CITY_AUTH_URL: https://authentication.onthecity.org/authorization
-
-
+                                                                             \
