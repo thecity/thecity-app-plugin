@@ -1,4 +1,4 @@
-citytestapp
+The City Example Internal Plugin
 ===========
 
 Example Test App for The City
