@@ -6,11 +6,12 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'thecity-plugin', git: "https://github.com/thecity/thecity-plugin.git"
+gem 'browser'
 gem 'thin'
 gem 'typhoeus'
 
 group :development, :test do
-  gem 'debugger'
+  # gem 'debugger'
 end
 
 # Gems used only for assets and not required
