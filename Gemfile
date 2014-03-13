@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'thecity'
 gem 'thecity-plugin', git: "https://github.com/thecity/thecity-plugin.git"
 gem 'browser'
 gem 'thin'
