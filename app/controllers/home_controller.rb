@@ -24,7 +24,7 @@ class HomeController < ApplicationController
   private
 
   def authentication_data(auth_token)
-    response = Typhoeus::Request.send(:get, THE_CITY_AUTH_URL, :params => {:access_token => auth_token})
+    response = Typhoeus::Request.send(:get, THECITY_AUTH_URL, :params => {:access_token => auth_token})
     response_body = {}
     if response.success?
       response_body = (JSON.parse(response.body) rescue {})
@@ -36,6 +36,21 @@ class HomeController < ApplicationController
       puts "HTTP request failed: " + response.code.to_s
     end
     return response_body
+  end
+
+  def me_data(auth_token, subdomain)
+
+    require "the_city"
+
+    client = TheCity::API::Client.new do |config|
+      config.app_id        = THECITY_APP_ID
+      config.app_secret    = THECITY_APP_SECRET
+      config.access_token  = auth_token
+      config.subdomain     = subdomain
+    end
+
+    return client.me
+
   end
 
   def set_city_data
@@ -52,11 +67,12 @@ class HomeController < ApplicationController
     end
 
     if @raw_city_data.present? and @raw_city_data_iv.present?
-      @decrypted_city_data = Thecity::Plugin::decrypt_city_data(@raw_city_data, @raw_city_data_iv, THE_CITY_APP_SECRET.first(32))
+      @decrypted_city_data = Thecity::Plugin::decrypt_city_data(@raw_city_data, @raw_city_data_iv, THECITY_APP_SECRET.first(32))
 
       @city_data = ActiveSupport::JSON.decode(@decrypted_city_data)
       if @city_data.present?
         @city_auth_data = authentication_data(@city_data["oauth_token"])
+        @city_me_data = me_data(@city_data["oauth_token"], @city_data['subdomain'])
       end
     end
 
