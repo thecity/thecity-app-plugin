@@ -55,6 +55,8 @@ class HomeController < ApplicationController
 
   def set_city_data
 
+    skip_api_data = ENV["TC_SKIP_API_DATA"].present? ? true : false
+
     if params.key?(:city_data)
       @raw_city_data = params[:city_data]
       @raw_city_data_iv = params[:city_data_iv]
@@ -70,7 +72,7 @@ class HomeController < ApplicationController
       @decrypted_city_data = Thecity::Plugin::decrypt_city_data(@raw_city_data, @raw_city_data_iv, THECITY_APP_SECRET.first(32))
 
       @city_data = ActiveSupport::JSON.decode(@decrypted_city_data)
-      if @city_data.present?
+      if @city_data.present? and !skip_api_data
         @city_auth_data = authentication_data(@city_data["oauth_token"])
         @city_me_data = me_data(@city_data["oauth_token"], @city_data['subdomain'])
       end

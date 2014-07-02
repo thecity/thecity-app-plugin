@@ -12,10 +12,14 @@ The Decrypted City Data (HASH) is:<br><br>
 
 <%= @city_data.to_s %><br><br><br>
 
-Your City Authentication Service data (HASH) is: <br><br>
+<% if @city_auth_data.present? %>
+  Your City Authentication Service data (HASH) is: <br><br>
 
-<%= @city_auth_data.to_s %><br><br><br>
+  <%= @city_auth_data.to_s %><br><br><br>
+<% end %>
 
+<% if @city_me_data.present? %>
 Your City Me data (HASH) is: <br><br>
 
 <%= @city_me_data.to_hash.to_s %>
+<% end %>
