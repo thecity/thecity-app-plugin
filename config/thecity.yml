@@ -1,0 +1,13 @@
+# sample config file for connecting to thecity
+development:
+  THECITY_APP_ID: 12345678
+  THECITY_APP_SECRET: "1234567890abcdefg"
+  THECITY_AUTH_URL: "http://someurl.org:3000"
+test:
+  THECITY_APP_ID: 12345678
+  THECITY_APP_SECRET: "1234567890abcdefg"
+  THECITY_AUTH_URL: "http://someurl.org:3000"
+production:
+  THECITY_APP_ID: 12345678
+  THECITY_APP_SECRET: "1234567890abcdefg"
+  THECITY_AUTH_URL: "http://someurl.org:3000"
